@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% block content %}{% endblock %}
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
