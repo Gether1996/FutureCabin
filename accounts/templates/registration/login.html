@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Prihlásenie{% endblock %}
+{% block content %}
+
+    <div class="login-register-container">
+      <h1>Prihlásenie</h1>
+          <form method="post">
+            {% csrf_token %}
+            <label for="username">Meno:</label>
+            <input type="text" name="username" id="username">
+            <br>
+            <label for="password">Heslo:</label>
+            <input type="password" name="password" id="password">
+            <br>
+            <input type="submit" class="login-register-confirm-button" value="Login">
+          </form>
+            <div class="signup-link-container">
+              <p class="no-account-text">Nemáte účet?</p>
+              <button class="sign-up-button"><a href="{% url 'registration' %}">Registrácia</a></button>
+            </div>
+    </div>
+
+
+{% endblock %}

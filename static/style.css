@@ -1,0 +1,146 @@
+body {
+    margin: 0px;
+    background-color: #000028;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 40, 0.5);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Set the width to 100% to span the entire viewport width */
+  z-index: 999; /* You can adjust the z-index to control the stacking order */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 800px; /* Total width of the buttons (4 buttons * 100px) */
+}
+
+.navbar-button {
+  text-decoration: none;
+  font-size: 25px;
+  color: white;;
+  margin-right: 20px;
+  transition: transform 0.2s; /* Add a smooth transition effect */
+}
+
+.login-register-container {
+  width: 300px;
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 50%; /* Align the top of the container to the vertical center */
+  left: 50%; /* Align the left of the container to the horizontal center */
+  transform: translate(-50%, -50%); /* Center the container both horizontally and vertically */
+  border: 5px solid white;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.login-register-container label {
+    display: block; /* Display labels on their own lines */
+    font-weight: bold; /* Make labels bold, adjust as needed */
+}
+
+.login-register-container input {
+    font-size: 18px;
+}
+
+/* Style the login form */
+.login-register-container form {
+    display: inline-block;
+    margin-bottom: 20px; /* Add space between form and button */
+    font-size: 20px;
+}
+
+.signup-link-container {
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Push content to the right */
+  margin-top: 10px; /* Adjust margin as needed */
+}
+
+.sign-up-button {
+    display: block;
+    margin: 0 auto; /* Center the button horizontally */
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sign-up-button a {
+    text-decoration: none; /* Remove underline */
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+}
+
+.login-register-confirm-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.login-register-confirm-button:hover,
+.navbar-button:hover,
+.sign-up-button:hover {
+    transform: scale(1.2);
+}
+
+.no-account-text {
+  margin-left: 30px; /* Add space between text and button */
+  color: white;
+}
+
+ul.messages {
+  list-style: none; /* Remove the default list style */
+  padding: 0; /* Remove default padding */
+  color: red;
+  margin-top: 20px;
+  font-size: 25px;
+  margin-bottom: 0px;
+}
+
+.center-container-gallery {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  height: 20vh; /* 100% of the viewport height, adjust as needed */
+  color: white;
+  margin-right: 30px;
+}
+
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center; /* Center both horizontally and vertically */
+  margin: 0 auto; /* Center horizontally */
+}
+
+.photo-item {
+  width: calc(33.33% - 20px); /* 10px is the total horizontal padding (5px on each side) */
+  margin-bottom: 20px; /* Add vertical spacing between rows */
+  padding: 5px; /* Add padding around each photo */
+  box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+.photo-item img {
+    width: 400px;
+}

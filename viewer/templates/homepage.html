@@ -7,6 +7,20 @@
 
 {% block content %}
     <h1 class="page-title">Domov</h1>
+
+    <img src="{% static 'images/cabin.jpg' %}" alt="dasdfas">
+
+    <div class="center-container-gallery">
+      <h2>Galéria</h2>
+    </div>
+
+    <div class="photo-grid">
+      {% for photo in photos %}
+        <div class="photo-item">
+          <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+        </div>
+      {% endfor %}
+    </div>
 {% endblock %}
 
 {% block extra_scripts %}
