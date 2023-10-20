@@ -129,18 +129,41 @@ ul.messages {
 .photo-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center; /* Center both horizontally and vertically */
-  margin: 0 auto; /* Center horizontally */
+  justify-content: space-between; /* Adjust the left margin based on your requirements */
+  margin-top: 20px; /* Add a top margin of 20px */
 }
 
 .photo-item {
-  width: calc(33.33% - 20px); /* 10px is the total horizontal padding (5px on each side) */
+  flex-basis: calc(33.33% - 20px); /* Calculate the width dynamically */
   margin-bottom: 20px; /* Add vertical spacing between rows */
   padding: 5px; /* Add padding around each photo */
   box-sizing: border-box; /* Include padding in the element's total width */
+  text-align: center; /* Center the image horizontally */
 }
 
 .photo-item img {
-    width: 400px;
+  max-width: 100%; /* Ensure the image doesn't exceed the container's width */
+  height: auto; /* Maintain the image's aspect ratio */
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  text-align: center; /* Center the text within the footer */
+  background-color: #000028; /* Background color for the footer */
+  padding: 50px; /* Add some padding to the footer */
+  color: white;
+}
+
+footer p {
+    margin-right: 50px;
+}
+
+footer img {
+    width: 16px;
+}
+
+hr {
+  border: 2px solid white; /* Add a horizontal line with a solid black border */
+  margin: 0; /* Remove any default margin on the <hr> element */
 }
