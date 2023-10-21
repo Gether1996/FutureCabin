@@ -6,12 +6,11 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Domov</h1>
 
     <img src="{% static 'images/cabin.jpg' %}" alt="dasdfas">
 
-    <div class="center-container-gallery">
-      <h2>Galéria</h2>
+    <div class="centered-container">
+      <h2 class="gallery-text">Galéria</h2>
     </div>
 
     <div class="photo-grid">
@@ -21,6 +20,13 @@
         </div>
       {% endfor %}
     </div>
+
+    <hr> <!-- Add a horizontal line -->
+    <footer>
+        <p><img src="{% static 'images/phone.png' %}" alt="phone">  +421 949 610 003</p>
+        <p><img src="{% static 'images/email.png' %}" alt="mail">  pat.kredatus@gmail.com</p>
+        <p>chaticka s.r.o.</p>
+    </footer>
 
 {% endblock %}
 

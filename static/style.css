@@ -1,8 +1,10 @@
 body {
-    margin: 0px;
+    margin-bottom: 0px;
     background-color: #000028;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 60px;
+    margin-right: 60px;
+    color: white;
+    margin-top: 80px;
 }
 
 .navbar {
@@ -117,13 +119,34 @@ ul.messages {
   margin-bottom: 0px;
 }
 
-.center-container-gallery {
-  display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  height: 20vh; /* 100% of the viewport height, adjust as needed */
-  color: white;
-  margin-right: 30px;
+.centered-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center; /* Vertically center the button */
+}
+
+.gallery-text {
+    margin-top: 25px;
+    font-size: 25px;
+    text-weight: bold;
+}
+
+/* Style the button as needed */
+.reservation-button {
+    text-decoration: none;
+    background-color: grey;
+    color: #FFF;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    border-radius: 5px;
+}
+
+.reservation-button:hover {
+    background-color: #007BFF;
 }
 
 .photo-grid {
@@ -151,7 +174,7 @@ footer {
   justify-content: center;
   text-align: center; /* Center the text within the footer */
   background-color: #000028; /* Background color for the footer */
-  padding: 50px; /* Add some padding to the footer */
+  padding: 20px; /* Add some padding to the footer */
   color: white;
 }
 
@@ -166,4 +189,39 @@ footer img {
 hr {
   border: 2px solid white; /* Add a horizontal line with a solid black border */
   margin: 0; /* Remove any default margin on the <hr> element */
+  margin-top: 5px;
+}
+
+#calendar {
+    height: 500px;
+}
+
+/* Change day header and event background color */
+.fc-daygrid-event, .fc-daygrid-day {
+    background-color: #333; /* Set the background color as needed */
+    color: white; /* Change text color */
+    font-size: 16px;
+    line-height: 10px;
+}
+
+.fc .fc-bg-event {
+    background-color: #580619e8;
+    font-size: 20px;
+    color: white;
+}
+
+.fc .fc-bg-event .fc-event-title {
+    color: white;
+    font-style: normal;
+    margin-top: 10px;
+}
+
+:root {
+    --fc-bg-event-opacity: 0.4; /* Adjust the opacity value here */
+    --fc-today-bg-color: #333 /* Adjust the color and opacity for today-bg-color */
+}
+
+.selected-date {
+  background-color: #519be5;
+  color: white; /* Change text color */
 }

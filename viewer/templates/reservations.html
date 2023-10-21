@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block extra_head %}
     <title>Rezervácie</title>
+    <script src='{% static "scripts/fullcalendar-6.1.9/dist/index.global.min.js" %}'></script>
+    <script>
+        var selectedStartDate = null;
+        var selectedEndDate = null;
+        var eventData = [
+            {% for event in event_data %}
+            {
+                title: 'Rezervované',
+                start: '{{ event.start }}',
+                end: '{{ event.end }}',
+                display: 'background'
+            },
+            {% endfor %}
+        ];
+    </script>
+    <script src='{% static "scripts/reservations.js" %}'></script>
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Rezervácie</h1>
+
+    <div id='calendar'></div>
+    <div class="centered-container">
+        <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+    </div>
+
+    <div class="centered-container">
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block extra_scripts %}
+
 
 {% endblock %}
