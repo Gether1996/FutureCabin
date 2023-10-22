@@ -5,8 +5,6 @@ from django.contrib import messages
 
 
 def checkout(request):
-    if request.user:
-        user = request.user
     dates = request.GET.get('dates')
 
     if not dates:
@@ -54,4 +52,14 @@ def checkout(request):
             messages.error(request, 'Váš termín je už obsadený.')
             return redirect('reservations')
 
-    return render(request, 'checkout.html', {'dates': selected_dates_by_user})
+    nights_count = len(selected_dates_by_user) - 1
+    night_text = 'noci' if nights_count < 5 else 'nocí'
+
+    context = {
+        'first_date': datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').strftime('%d.%m.%Y'),
+        'last_date': datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d').strftime('%d.%m.%Y'),
+        'nights': nights_count,
+        'night_text': night_text
+    }
+
+    return render(request, 'checkout.html', context)

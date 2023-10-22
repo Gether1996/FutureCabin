@@ -193,7 +193,7 @@ hr {
 }
 
 #calendar {
-    height: 500px;
+    height: 70vh; /* Set the height to 70% of the viewport height */
 }
 
 /* Change day header and event background color */

@@ -7,10 +7,8 @@
 {% block content %}
     <h1 class="page-title">Zhrnutie</h1>
 
-    <h3>Vybrali ste si termín:</h3>
-    {% for date in dates %}
-        <p>{{date}}</p>
-    {% endfor %}
+    <h3>Termín: {{ first_date }} - {{ last_date }}  ({{ nights }} {{ night_text }})</h3>
+
 {% endblock %}
 
 {% block extra_scripts %}
