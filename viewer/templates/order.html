@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+    <title>Zhrnutie</title>
+{% endblock %}
+
+{% block content %}
+<div class="centered-container-column">
+    <h1 class="page-title">Zhrnutie a platba</h1>
+
+    <table>
+        <tr>
+            <td><strong>Meno a Priezvisko:</strong></td>
+            <td>{{ order.name_surname }}</td>
+        </tr>
+        <tr>
+            <td><strong>Od:</strong></td>
+            <td>{{ order.date_from|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Do:</strong></td>
+            <td>{{ order.date_to|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ order.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Telefón:</strong></td>
+            <td>{{ order.phone }}</td>
+        </tr>
+        <tr>
+            <td><strong>Ulica:</strong></td>
+            <td>{{ order.address }}</td>
+        </tr>
+        <tr>
+            <td><strong>Mesto:</strong></td>
+            <td>{{ order.city }}</td>
+        </tr>
+        <tr>
+            <td><strong>PSČ:</strong></td>
+            <td>{{ order.postal }}</td>
+        </tr>
+    </table>
+
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}

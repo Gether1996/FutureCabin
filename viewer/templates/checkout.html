@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
 
 {% block extra_head %}
-    <title>Zhrnutie</title>
+    <title>Objednávka</title>
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Zhrnutie</h1>
+<div class="centered-container-column">
+    <h1 class="page-title">Objednávka</h1>
 
     <h3>Termín: {{ first_date }} - {{ last_date }}  ({{ nights }} {{ night_text }})</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_name_surname">Meno a priezvisko</label>
+        {{ form.name_surname }}
+        <br>
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+        <br>
+        <label for="id_phone">Telefón:</label>
+        {{ form.phone }}
+        <br>
+        <label for="id_address">Ulica:</label>
+        {{ form.address }}
+        <br>
+        <label for="id_city">Mesto:</label>
+        {{ form.city }}
+        <br>
+        <label for="id_postal">PSČ:</label>
+        {{ form.postal }}
+        {{ form.postal.errors }}
+        <br>
+        <input class="submit-botton" type="submit" value="Prejsť na platbu">
+    </form>
+</div>
 
 {% endblock %}
 

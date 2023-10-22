@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Reservation
+from .models import Reservation, Order
 from datetime import datetime, timedelta
 from django.contrib import messages
+from .forms import OrderForm
 
 
 def checkout(request):
@@ -55,11 +56,40 @@ def checkout(request):
     nights_count = len(selected_dates_by_user) - 1
     night_text = 'noci' if nights_count < 5 else 'nocí'
 
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = Order.objects.create(
+                name_surname=form.cleaned_data['name_surname'],
+                email=form.cleaned_data['email'],
+                phone=form.cleaned_data['phone'],
+                date_from=datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d'),
+                date_to=datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d'),
+                address=form.cleaned_data['address'],
+                city=form.cleaned_data['city'],
+                postal=form.cleaned_data['postal']
+            )
+            order_id = order.id
+            return redirect('order', order_id=order_id)
+    else:
+        form = OrderForm()
+
     context = {
         'first_date': datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').strftime('%d.%m.%Y'),
         'last_date': datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d').strftime('%d.%m.%Y'),
         'nights': nights_count,
-        'night_text': night_text
+        'night_text': night_text,
+        'form': form
     }
 
     return render(request, 'checkout.html', context)
+
+
+def order(request, order_id):
+    order_details = Order.objects.get(id=order_id)
+
+    context = {
+        'order': order_details,
+    }
+
+    return render(request, 'order.html', context)
