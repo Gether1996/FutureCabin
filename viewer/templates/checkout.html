@@ -14,18 +14,23 @@
         {% csrf_token %}
         <label for="id_name_surname">Meno a priezvisko</label>
         {{ form.name_surname }}
+        {{ form.name_surname.errors }}
         <br>
         <label for="id_email">Email:</label>
         {{ form.email }}
+        {{ form.email.errors }}
         <br>
         <label for="id_phone">Telefón:</label>
         {{ form.phone }}
+        {{ form.phone.errors }}
         <br>
         <label for="id_address">Ulica:</label>
         {{ form.address }}
+        {{ form.address.errors }}
         <br>
         <label for="id_city">Mesto:</label>
         {{ form.city }}
+        {{ form.city.errors }}
         <br>
         <label for="id_postal">PSČ:</label>
         {{ form.postal }}

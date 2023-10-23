@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.urls import path, include
 from viewer.views import homepage, reservations, contact
 from accounts.views import logout_view, registration, account
-from reservation.views import checkout, order
+from reservation.views import checkout, order, success, fail
 
 urlpatterns = [
     path('', homepage, name='homepage'),
@@ -31,7 +31,10 @@ urlpatterns = [
     path('account/', account, name='account'),
     path('logout/', logout_view, name='logout'),
     path('reservations/', reservations, name='reservations'),
+    path('paypal/ipn/', reservations, name='paypal_ipn'),
     path('contact/', contact, name='contact'),
     path('checkout/', checkout, name='checkout'),
     path('order/<int:order_id>/', order, name='order'),
+    path('success/', success, name='success'),
+    path('fail/', fail, name='fail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -17,4 +17,5 @@ class Order(Model):
     address = CharField(max_length=100)
     city = CharField(max_length=100)
     postal = BigIntegerField()
+    price = IntegerField()
     paid = BooleanField(default=False)

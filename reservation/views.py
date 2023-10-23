@@ -3,6 +3,10 @@ from .models import Reservation, Order
 from datetime import datetime, timedelta
 from django.contrib import messages
 from .forms import OrderForm
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+from django.urls import reverse
+import uuid
 
 
 def checkout(request):
@@ -59,6 +63,7 @@ def checkout(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
+            print("Form data:", form.cleaned_data)
             order = Order.objects.create(
                 name_surname=form.cleaned_data['name_surname'],
                 email=form.cleaned_data['email'],
@@ -67,7 +72,8 @@ def checkout(request):
                 date_to=datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d'),
                 address=form.cleaned_data['address'],
                 city=form.cleaned_data['city'],
-                postal=form.cleaned_data['postal']
+                postal=form.cleaned_data['postal'],
+                price=nights_count
             )
             order_id = order.id
             return redirect('order', order_id=order_id)
@@ -88,8 +94,39 @@ def checkout(request):
 def order(request, order_id):
     order_details = Order.objects.get(id=order_id)
 
+    request.session['order_id'] = order_details.id
+
+    host = request.get_host()
+
+    paypal_dict = {
+        "business": settings.PAYPAL_RECEIVER_EMAIL,
+        "amount": order_details.price,  # Use dollar_value here
+        "item_name": 'Pobyt',
+        "invoice": uuid.uuid4(),  # Unique invoice ID
+        "currency_code": "USD",
+        "notify_url": f"http://{host}{reverse('paypal-ipn')}",
+        "return_url": f"http://{host}{reverse('success')}",
+        "cancel_return": f"http://{host}{reverse('fail')}",
+    }
+
+    payment_paypal = PayPalPaymentsForm(initial=paypal_dict)
+
     context = {
         'order': order_details,
+        'paypal': payment_paypal
     }
 
     return render(request, 'order.html', context)
+
+
+def success(request):
+    order_id = request.session.get('order_id')
+    order_to_pay = Order.objects.get(id=order_id)
+    order_to_pay.paid = True
+    del request.session['order_id']
+    return render(request, 'payment_ok.html')
+
+
+def fail(request):
+    del request.session['coins']
+    return render(request, 'payment_fail.html')

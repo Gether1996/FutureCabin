@@ -41,7 +41,12 @@
             <td><strong>PSČ:</strong></td>
             <td>{{ order.postal }}</td>
         </tr>
+        <tr>
+            <td><strong>Cena:</strong></td>
+            <td>{{ order.price }}</td>
+        </tr>
     </table>
+    {{ paypal.render }}
 
 </div>
 
