@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'viewer',
     'reservation',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
