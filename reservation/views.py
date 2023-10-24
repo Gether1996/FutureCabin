@@ -11,6 +11,7 @@ import uuid
 
 def checkout(request):
     dates = request.GET.get('dates')
+    print(dates)
 
     if not dates:
         messages.error(request, 'Vyberte si termín.')
@@ -60,6 +61,8 @@ def checkout(request):
     nights_count = len(selected_dates_by_user) - 1
     night_text = 'noci' if nights_count < 5 else 'nocí'
 
+    print("print before if POST")
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -72,13 +75,14 @@ def checkout(request):
                 date_to=datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d'),
                 address=form.cleaned_data['address'],
                 city=form.cleaned_data['city'],
-                postal=form.cleaned_data['postal'],
-                price=nights_count
+                postal=form.cleaned_data['postal']
             )
             order_id = order.id
             return redirect('order', order_id=order_id)
     else:
         form = OrderForm()
+
+    print("print after POST")
 
     context = {
         'first_date': datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').strftime('%d.%m.%Y'),

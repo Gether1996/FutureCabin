@@ -32,6 +32,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('reservations/', reservations, name='reservations'),
     path('paypal/ipn/', reservations, name='paypal_ipn'),
+    path('', include('paypal.standard.ipn.urls')),
     path('contact/', contact, name='contact'),
     path('checkout/', checkout, name='checkout'),
     path('order/<int:order_id>/', order, name='order'),
