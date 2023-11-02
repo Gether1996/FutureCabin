@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import Reservation, Order
-
-
-@admin.register(Reservation)
-class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_from', 'date_to')
+from .models import Order
 
 
 @admin.register(Order)

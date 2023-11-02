@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Reservation, Order
+from .models import Order
 from datetime import datetime, timedelta
 from django.contrib import messages
 from .forms import OrderForm
@@ -40,7 +40,7 @@ def checkout(request):
         return redirect('reservations')
 
     # Retrieve all reservations from the database
-    reservations = Reservation.objects.all()
+    reservations = Order.objects.all()
 
     # Iterate through reservations to extract reserved dates
     # last day of reservation can be reserved again
@@ -61,12 +61,9 @@ def checkout(request):
     nights_count = len(selected_dates_by_user) - 1
     night_text = 'noci' if nights_count < 5 else 'nocí'
 
-    print("print before if POST")
-
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            print("Form data:", form.cleaned_data)
             order = Order.objects.create(
                 name_surname=form.cleaned_data['name_surname'],
                 email=form.cleaned_data['email'],
@@ -75,14 +72,13 @@ def checkout(request):
                 date_to=datetime.strptime(selected_dates_by_user[-1], '%Y-%m-%d'),
                 address=form.cleaned_data['address'],
                 city=form.cleaned_data['city'],
-                postal=form.cleaned_data['postal']
+                postal=form.cleaned_data['postal'],
+                price=nights_count * 99
             )
             order_id = order.id
             return redirect('order', order_id=order_id)
     else:
         form = OrderForm()
-
-    print("print after POST")
 
     context = {
         'first_date': datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').strftime('%d.%m.%Y'),
@@ -124,9 +120,11 @@ def order(request, order_id):
 
 
 def success(request):
-    order_id = request.session.get('order_id')
+    order_id = request.session['order_id']
+    print(order_id)
     order_to_pay = Order.objects.get(id=order_id)
     order_to_pay.paid = True
+    order_to_pay.save()
     del request.session['order_id']
     return render(request, 'payment_ok.html')
 

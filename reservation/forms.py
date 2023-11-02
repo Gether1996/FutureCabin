@@ -21,4 +21,4 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        exclude = ['date_from', 'date_to', 'paid']
+        exclude = ['date_from', 'date_to', 'price', 'paid']

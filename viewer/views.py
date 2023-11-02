@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Photo
-from reservation.models import Reservation
+from reservation.models import Order
 
 
 def homepage(request):
@@ -10,7 +10,7 @@ def homepage(request):
 
 def reservations(request):
     event_data = []
-    all_reservations = Reservation.objects.all()
+    all_reservations = Order.objects.all()
     for reservation in all_reservations:
         event = {
             'start': reservation.date_from.strftime('%Y-%m-%d'),

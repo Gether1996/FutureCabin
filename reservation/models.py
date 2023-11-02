@@ -1,13 +1,6 @@
 from django.db.models import *
 
 
-class Reservation(Model):
-    name = CharField(max_length=100)
-    date_from = DateField()
-    date_to = DateField()
-    active = BooleanField(default=True)
-
-
 class Order(Model):
     name_surname = CharField(max_length=200)
     email = EmailField()
@@ -17,5 +10,5 @@ class Order(Model):
     address = CharField(max_length=100)
     city = CharField(max_length=100)
     postal = BigIntegerField()
-    price = IntegerField()
+    price = IntegerField(null=True, blank=True)
     paid = BooleanField(default=False)
