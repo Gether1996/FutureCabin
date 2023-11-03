@@ -1,19 +1,20 @@
 body {
     margin-bottom: 0px;
-    background-color: #000028;
     margin-left: 60px;
     margin-right: 60px;
-    color: white;
     margin-top: 80px;
+    font-size: 20px;
+    color: black;
 }
 
 .page-title {
     font-size: 35px;
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
 .navbar {
-  background-color: rgba(0, 0, 40, 0.5);
+  background-color: rgba(0, 0, 40, 0.9);
+  color: white;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -43,7 +44,7 @@ body {
 .login-register-container {
   width: 300px;
   text-align: center;
-  color: white;
+  color: black;
   position: absolute;
   top: 50%; /* Align the top of the container to the vertical center */
   left: 50%; /* Align the left of the container to the horizontal center */
@@ -81,7 +82,7 @@ body {
     background-color: transparent;
     border: none;
     font-size: 20px;
-    color: white;
+    color: black;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -98,7 +99,7 @@ body {
 
 .no-account-text {
   margin-left: 30px; /* Add space between text and button */
-  color: white;
+  color: black;
 }
 
 .centered-container {
@@ -138,7 +139,7 @@ body {
 }
 
 .reservation-button:hover {
-    background-color: #007BFF;
+    background-color: rgba(0, 0, 40, 0.9);
 }
 
 .photo-grid {
@@ -162,6 +163,7 @@ body {
 }
 
 footer {
+  border-radius: 20% 20% 0 0;
   display: flex;
   justify-content: center;
   text-align: center; /* Center the text within the footer */
@@ -185,7 +187,8 @@ hr {
 }
 
 #calendar {
-    height: 70vh; /* Set the height to 70% of the viewport height */
+    height: 65vh; /* Set the height to 70% of the viewport height */
+    transition: 0.5s ease;
 }
 
 #calendar th {
@@ -194,16 +197,16 @@ hr {
 
 /* Change day header and event background color */
 .fc-daygrid-event, .fc-daygrid-day {
-    background-color: #333; /* Set the background color as needed */
-    color: white; /* Change text color */
-    font-size: 16px;
+    background-color: white;
+    color: black; /* Change text color */
+    font-size: 20px;
     line-height: 10px;
 }
 
 .fc .fc-bg-event {
-    background-color: #580619e8;
+    background-color: red;
+    opacity: 0.2;
     font-size: 20px;
-    color: white;
 }
 
 .fc .fc-bg-event .fc-event-title {
@@ -212,13 +215,8 @@ hr {
     margin-top: 10px;
 }
 
-:root {
-    --fc-bg-event-opacity: 0.4; /* Adjust the opacity value here */
-    --fc-today-bg-color: #333 /* Adjust the color and opacity for today-bg-color */
-}
-
 .selected-date {
-  background-color: #519be5;
+  background-color: rgba(0, 0, 40, 0.9);
   color: white; /* Change text color */
 }
 
@@ -256,8 +254,8 @@ input[type="password"] {
 
 /* Style for submit button */
 input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
+    background-color: grey;
+    color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -269,7 +267,7 @@ input[type="submit"] {
 
 /* Hover effect for submit button */
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: rgba(0, 0, 40, 0.9);
 }
 
 /* Apply the "order-table" class to the table element */
@@ -304,4 +302,167 @@ input[type="submit"]:hover {
 /* Style for field names (in bold) within the "order-table" class */
 .order-table td:first-child {
     font-weight: bold;
+}
+
+#dateDisplay{
+    opacity: 0; /* Initially set opacity to 0 */
+    visibility: hidden; /* Initially hide the element */
+    transition: opacity 0.5s ease;
+    font-size: 20px;
+    display: flex;
+}
+
+#selectedDatesDisplay {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.slider {
+    width: 80%; /* Set the width of the slider */
+    margin: 0 auto; /* Center the slider */
+    position: relative;
+}
+
+.slider img {
+    width: 100%; /* Ensure images fill the slider */
+    height: auto; /* Maintain image aspect ratio */
+}
+
+.slick-prev,
+.slick-next {
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+
+    z-index: 1;
+}
+
+.slick-prev {
+    left: 10px; /* Adjust the position of the left arrow */
+}
+
+.slick-next {
+    right: 10px; /* Adjust the position of the right arrow */
+}
+
+.custom-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ccc;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+/* Style for the active dot */
+.slick-active .custom-dot {
+    background: #333;
+}
+
+.slick-dotted.slick-slider .slick-dots li {
+    margin: 5px 5px; /* Adjust space between dots */
+    display: inline-block;
+    list-style: none; /* Remove list-style markers */
+}
+
+.slick-dotted.slick-slider .slick-dots {
+    display: flex;
+    justify-content: center; /* Align dots to the center */
+}
+
+.user-info {
+    position: absolute;
+    right: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.user-info h2 {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.fa-user-tie {
+    font-size: 30px;
+    padding: 7px 10px 7px 10px;
+    border: none;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+
+.base-logout {
+    color: white;
+    font-size: 30px;
+}
+
+.base-logout:hover {
+   transform: scale(1.4);
+  transition: transform 0.3s ease;
+}
+
+.checkout-submit-button {
+    margin-left: 100px;
+}
+
+/* Styles for the orders container */
+.orders-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Styles for individual order block */
+.order {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    width: 320px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Styles for specific details within the order block */
+.order p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.order p strong {
+    color: #333;
+}
+
+/* Style for 'Paid' status */
+.order p strong:after {
+    content: attr(data-status);
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-left: 8px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+/* Example of paid status styles */
+.order p strong:after[data-status='Yes'] {
+    background-color: #28a745; /* green */
+}
+
+.order p strong:after[data-status='No'] {
+    background-color: #dc3545; /* red */
 }

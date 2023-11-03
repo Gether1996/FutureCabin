@@ -4,5 +4,13 @@
     <a href="{% url 'reservations' %}" class="navbar-button">Rezervácia</a>
     <a href="{% url 'contact' %}" class="navbar-button">Kontakt</a>
     <a href="{% url 'account' %}" class="navbar-button">Účet</a>
+    <a href="{% url 'gallery' %}" class="navbar-button">Galéria</a>
+    {% if request.user.is_authenticated %}
+      <div class="user-info" onclick="logoutConfirmation()">
+          <i class="fa-regular fa-user-tie"></i>
+          <h2>{{ user.username }}</h2>
+          <a href="#"><i class="fas fa-sign-out-alt base-logout" title="Odhlásiť sa"></i></a>
+      </div>
+    {% endif %}
   </div>
 </nav>

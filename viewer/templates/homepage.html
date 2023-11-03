@@ -3,25 +3,18 @@
 
 {% block extra_head %}
     <title>Domov</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
 {% endblock %}
 
 {% block content %}
 
-    <img src="{% static 'images/cabin.jpg' %}" alt="dasdfas">
-
-    <div class="centered-container">
-      <h2 class="gallery-text">Galéria</h2>
+    <div class="slider">
+        {% for photo in photos %}
+            <div><img src="{{ photo.photo.url }}" alt="Slide"></div>
+        {% endfor %}
     </div>
 
-    <div class="photo-grid">
-      {% for photo in photos %}
-        <div class="photo-item">
-          <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
-        </div>
-      {% endfor %}
-    </div>
-
-    <hr> <!-- Add a horizontal line -->
+    <hr>
     <footer>
         <p><img src="{% static 'images/phone.png' %}" alt="phone">  +421 949 610 003</p>
         <p><img src="{% static 'images/email.png' %}" alt="mail">  pat.kredatus@gmail.com</p>
@@ -31,5 +24,6 @@
 {% endblock %}
 
 {% block extra_scripts %}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src='{% static "scripts/homepage.js" %}'></script>
 {% endblock %}

@@ -3,6 +3,7 @@ from .forms import SignUpForm
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from reservation.models import Order
 
 
 def logout_view(request):
@@ -27,4 +28,12 @@ def registration(request):
 @login_required
 def account(request):
     user = request.user
-    return render(request, 'account.html', {'user': user})
+    try:
+        my_orders = Order.objects.filter(email=user.email)
+    except Order.DoesNotExist:
+        my_orders = None
+    context = {
+        'user': user,
+        'my_orders': my_orders,
+    }
+    return render(request, 'account.html', context)

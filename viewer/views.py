@@ -28,3 +28,7 @@ def reservations(request):
 def contact(request):
     return render(request, 'contact.html')
 
+
+def gallery(request):
+    photos = Photo.objects.all()
+    return render(request, 'gallery.html', {'photos': photos})

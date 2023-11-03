@@ -18,12 +18,14 @@
             {% endfor %}
         ];
     </script>
-    <script src='{% static "scripts/reservations.js" %}'></script>
 {% endblock %}
 
 {% block content %}
 
-    <div id="dateDisplay"></div>
+    <div id="dateDisplay" class="centered-container">
+        <p>Termín: </p>
+        <p id="selectedDatesDisplay"></p>
+    </div>
     <div id='calendar'></div>
     <div class="centered-container">
         <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
@@ -36,9 +38,9 @@
             {% endfor %}
         {% endif %}
     </div>
+
 {% endblock %}
 
 {% block extra_scripts %}
-
-
+    <script src='{% static "scripts/reservations.js" %}'></script>
 {% endblock %}

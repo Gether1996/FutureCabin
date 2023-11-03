@@ -10,6 +10,7 @@ import uuid
 
 
 def checkout(request):
+    current_date = datetime.now()
     dates = request.GET.get('dates')
     print(dates)
 
@@ -37,6 +38,10 @@ def checkout(request):
 
     if len(selected_dates_by_user) <3:
         messages.error(request, 'Vyberte si minimálne 2 noci.')
+        return redirect('reservations')
+
+    if datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').date() <= current_date.date():
+        messages.error(request, 'Dnes, ani dni predtým sa nedá spraviť rezervácia.')
         return redirect('reservations')
 
     # Retrieve all reservations from the database
@@ -103,7 +108,7 @@ def order(request, order_id):
         "amount": order_details.price,  # Use dollar_value here
         "item_name": 'Pobyt',
         "invoice": uuid.uuid4(),  # Unique invoice ID
-        "currency_code": "USD",
+        "currency_code": "EUR",
         "notify_url": f"http://{host}{reverse('paypal-ipn')}",
         "return_url": f"http://{host}{reverse('success')}",
         "cancel_return": f"http://{host}{reverse('fail')}",

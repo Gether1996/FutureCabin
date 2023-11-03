@@ -5,7 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Účet</h1>
+    <h1 class="page-title">{{ user.username }}</h1>
+
+    {% if my_orders %}
+        <div class="orders-container">
+            {% for order in my_orders %}
+                <div class="order">
+                    <h4>{{ order.name_surname }}</h4>
+                    <p><strong>Email:</strong> {{ order.email }}</p>
+                    <p><strong>Telefón:</strong> {{ order.phone }}</p>
+                    <p><strong>Termín:</strong> {{ order.date_from|date:"d.m.Y" }} - {{ order.date_to|date:"d.m.Y" }}</p>
+                    <p><strong>Adresa:</strong> {{ order.address }}, {{ order.city }}, {{ order.postal }}</p>
+                    <p><strong>Cena:</strong> {% if order.price %}€{{ order.price }}{% else %}Not specified{% endif %}</p>
+                    <p><strong>Zaplatené:</strong> {% if order.paid %}Áno{% else %}Nie{% endif %}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Žiadne objednávky.</p>
+    {% endif %}
+
 {% endblock %}
 
 {% block extra_scripts %}
