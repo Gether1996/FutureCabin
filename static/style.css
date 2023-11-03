@@ -466,3 +466,13 @@ input[type="submit"]:hover {
 .order p strong:after[data-status='No'] {
     background-color: #dc3545; /* red */
 }
+
+.fc-event-start,
+.fc-event-end {
+  position: relative;
+  background-color: red; /* Change the color as needed */
+  width: 80%; /* Set to cover 70% of the width of the event */
+  margin-left: 10%; /* Trim 15% from the left side */
+  margin-right: 10%; /* Trim 15% from the right side */
+  border-radius: 0 80% 0 80%;
+}

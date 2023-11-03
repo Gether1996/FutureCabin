@@ -50,7 +50,7 @@ def checkout(request):
     # Iterate through reservations to extract reserved dates
     # last day of reservation can be reserved again
     for reservation in reservations:
-        start_date = reservation.date_from
+        start_date = reservation.date_from + timedelta(days=1)
         end_date = reservation.date_to - timedelta(days=1)
 
         # Generate a list of dates within the reservation range
