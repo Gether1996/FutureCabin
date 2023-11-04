@@ -119,7 +119,7 @@ body {
 }
 
 .gallery-text {
-    margin-top: 25px;
+    margin-top: 80px;
     font-size: 30px;
     text-weight: bold;
 }
@@ -187,8 +187,9 @@ hr {
 }
 
 #calendar {
-    height: 65vh; /* Set the height to 70% of the viewport height */
+    height: 65vh;
     transition: 0.5s ease;
+    margin-top: 10px;
 }
 
 #calendar th {

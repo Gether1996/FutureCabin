@@ -16,7 +16,7 @@ def checkout(request):
 
     if not dates:
         messages.error(request, 'Vyberte si termín.')
-        return redirect('reservations')
+        return redirect('/#reservations')
 
     dates = dates.split(',')
     selected_dates_by_user = []
@@ -38,11 +38,11 @@ def checkout(request):
 
     if len(selected_dates_by_user) <3:
         messages.error(request, 'Vyberte si minimálne 2 noci.')
-        return redirect('reservations')
+        return redirect('/#reservations')
 
     if datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').date() <= current_date.date():
         messages.error(request, 'Dnes, ani dni predtým sa nedá spraviť rezervácia.')
-        return redirect('reservations')
+        return redirect('/#reservations')
 
     # Retrieve all reservations from the database
     reservations = Order.objects.all()
@@ -61,7 +61,7 @@ def checkout(request):
     for date in selected_dates_by_user:
         if date in reserved_dates:
             messages.error(request, 'Váš termín je už obsadený.')
-            return redirect('reservations')
+            return redirect('/#reservations')
 
     nights_count = len(selected_dates_by_user) - 1
     night_text = 'noci' if nights_count < 5 else 'nocí'

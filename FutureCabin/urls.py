@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from viewer.views import homepage, reservations, contact, gallery
+from viewer.views import homepage
 from accounts.views import logout_view, registration, account
 from reservation.views import checkout, order, success, fail
 
@@ -30,11 +30,8 @@ urlpatterns = [
     path('accounts/profile/', account, name='account_after_login'),
     path('account/', account, name='account'),
     path('logout/', logout_view, name='logout'),
-    path('reservations/', reservations, name='reservations'),
-    path('paypal/ipn/', reservations, name='paypal_ipn'),
+    path('paypal/ipn/', homepage, name='paypal_ipn'),
     path('', include('paypal.standard.ipn.urls')),
-    path('contact/', contact, name='contact'),
-    path('gallery/', gallery, name='gallery'),
     path('checkout/', checkout, name='checkout'),
     path('order/<int:order_id>/', order, name='order'),
     path('success/', success, name='success'),

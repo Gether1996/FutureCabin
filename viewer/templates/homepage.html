@@ -4,6 +4,21 @@
 {% block extra_head %}
     <title>Domov</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <script src='{% static "scripts/fullcalendar-6.1.9/dist/index.global.min.js" %}'></script>
+    <script>
+        var selectedStartDate = null;
+        var selectedEndDate = null;
+        var eventData = [
+            {% for event in event_data %}
+                {
+                    title: 'Rezervované',
+                    start: '{{ event.start }}',
+                    end: '{{ event.end }}',
+                    display: 'background'
+                },
+            {% endfor %}
+        ];
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -14,11 +29,44 @@
         {% endfor %}
     </div>
 
+    <section id="reservations">
+        <div id="dateDisplay" class="centered-container">
+            <p>Termín: </p>
+            <p id="selectedDatesDisplay"></p>
+        </div>
+
+        <div class="centered-container">
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="message-text">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div id='calendar'></div>
+        <div class="centered-container">
+            <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+        </div>
+    </section>
+
+    <div class="centered-container">
+        <h2 class="gallery-text">Galéria</h2>
+    </div>
+
+    <div class="photo-grid">
+      {% for photo in photos %}
+        <div class="photo-item">
+          <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+        </div>
+      {% endfor %}
+    </div>
+
     <hr>
-    <footer>
+    <footer id="footer">
         <p><img src="{% static 'images/phone.png' %}" alt="phone">  +421 949 610 003</p>
         <p><img src="{% static 'images/email.png' %}" alt="mail">  pat.kredatus@gmail.com</p>
         <p>chaticka s.r.o.</p>
+        <p><img src="{% static 'images/map.png' %}" alt="map">49.225275,18.781458</p>
     </footer>
 
 {% endblock %}
@@ -26,4 +74,5 @@
 {% block extra_scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src='{% static "scripts/homepage.js" %}'></script>
+    <script src='{% static "scripts/reservations.js" %}'></script>
 {% endblock %}
