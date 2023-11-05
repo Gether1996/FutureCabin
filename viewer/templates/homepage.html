@@ -3,7 +3,8 @@
 
 {% block extra_head %}
     <title>Domov</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" href="{% static 'lightbox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'slick.min.css' %}">
     <script src='{% static "scripts/fullcalendar-6.1.9/dist/index.global.min.js" %}'></script>
     <script>
         var selectedStartDate = null;
@@ -30,11 +31,27 @@
     </div>
 
     <section id="reservations">
-        <div id="dateDisplay" class="centered-container">
-            <p>Termín: </p>
-            <p id="selectedDatesDisplay"></p>
-        </div>
 
+        <div class="calendar-container">
+            <div id="calendar"></div>
+            <div class="calendar-text">
+                <ul>
+                    <li>Minimálne 2 noci</li>
+                    <li>dlfjasdôlfajdf</li>
+                    <li>dlfjasdôlfajdf</li>
+                    <li>dlfjasdôlfajdf</li>
+                    <li>dlfjasdôlfajdf</li>
+                    <li>Cena 99€ za noc</li>
+                </ul>
+            </div>
+        </div>
+        <div class="centered-container">
+            <div id="dateDisplay">
+                <p>Termín: </p>
+                <p id="selectedDatesDisplay"></p>
+            </div>
+            <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+        </div>
         <div class="centered-container">
             {% if messages %}
                 {% for message in messages %}
@@ -42,37 +59,36 @@
                 {% endfor %}
             {% endif %}
         </div>
+    </section>
 
-        <div id='calendar'></div>
+    <section id="gallery">
         <div class="centered-container">
-            <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+            <h2 class="gallery-text">Galéria</h2>
+        </div>
+
+        <div class="photo-grid">
+          {% for photo in photos %}
+            <div class="photo-item">
+              <a href="{{ photo.photo.url }}" data-lightbox="photos" data-title="{{ photo.description }}">
+                <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
+              </a>
+            </div>
+          {% endfor %}
         </div>
     </section>
 
-    <div class="centered-container">
-        <h2 class="gallery-text">Galéria</h2>
-    </div>
-
-    <div class="photo-grid">
-      {% for photo in photos %}
-        <div class="photo-item">
-          <img src="{{ photo.photo.url }}" alt="{{ photo.description }}">
-        </div>
-      {% endfor %}
-    </div>
-
-    <hr>
     <footer id="footer">
-        <p><img src="{% static 'images/phone.png' %}" alt="phone">  +421 949 610 003</p>
-        <p><img src="{% static 'images/email.png' %}" alt="mail">  pat.kredatus@gmail.com</p>
+        <p><i class="fa-duotone fa-phone"></i>  +421 949 610 003</p>
+        <p><i class="fa-duotone fa-envelope"></i>  pat.kredatus@gmail.com</p>
         <p>chaticka s.r.o.</p>
-        <p><img src="{% static 'images/map.png' %}" alt="map">49.225275,18.781458</p>
+        <p><i class="fa-solid fa-map-location-dot"></i>  49.225275,18.781458</p>
     </footer>
 
 {% endblock %}
 
 {% block extra_scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src='{% static "scripts/slick.min.js" %}'></script>
     <script src='{% static "scripts/homepage.js" %}'></script>
     <script src='{% static "scripts/reservations.js" %}'></script>
+    <script src='{% static "scripts/lightbox.min.js" %}'></script>
 {% endblock %}

@@ -1,15 +1,9 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <a href="{% url 'homepage' %}" class="navbar-button">Domov</a>
+    <a href="{% url 'homepage' %}" class="navbar-button" title="Domov"><i class="fa-light fa-cabin"></i></a>
     <a href="#" class="navbar-button" onclick="smoothScroll('reservations')">Rezervácia</a>
+    <a href="#" class="navbar-button" onclick="smoothScroll('gallery')">Galéria</a>
     <a href="#" class="navbar-button" onclick="smoothScroll('footer')">Kontakt</a>
-<!--    <a href="{% url 'account' %}" class="navbar-button">Účet</a>-->
-<!--    {% if request.user.is_authenticated %}-->
-<!--      <div class="user-info" onclick="logoutConfirmation()">-->
-<!--          <i class="fa-regular fa-user-tie"></i>-->
-<!--          <h2>{{ user.username }}</h2>-->
-<!--          <a href="#"><i class="fas fa-sign-out-alt base-logout" title="Odhlásiť sa"></i></a>-->
-<!--      </div>-->
-<!--    {% endif %}-->
+    <a href="#" class="navbar-button" onclick="scrollToTop()" title="Späť na začiatok"><i class="fa-solid fa-arrow-up-to-line"></i></a>
   </div>
 </nav>
