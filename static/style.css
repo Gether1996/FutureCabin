@@ -235,8 +235,24 @@ hr {
 }
 
 .selected-date {
-  background-color: rgba(0, 0, 40, 0.9);
-  color: white; /* Change text color */
+  position: relative;
+  width: 140px; /* Adjust according to your design */
+  height: 30px; /* Adjust according to your design */
+  line-height: 31px; /* Center the text vertically */
+  text-align: center;
+  border-radius: 50%; /* Ensure it's a circle */
+}
+
+.selected-date::before {
+  content: '';
+  position: absolute;
+  top: 50%; /* Position it in the middle */
+  left: 50%; /* Position it in the middle */
+  transform: translate(-50%, -50%); /* Adjust the position */
+  width: 25px; /* Diameter of the circle */
+  height: 25px; /* Diameter of the circle */
+  border-radius: 50%; /* Ensure it's a circle */
+  background-color: rgba(0, 0, 40, 0.9); /* Color of the circle */
 }
 
 /* Styling for form container */
@@ -323,9 +339,8 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-#dateDisplay{
-    opacity: 0; /* Initially set opacity to 0 */
-    visibility: hidden; /* Initially hide the element */
+#dateDisplay{ /* Initially set opacity to 0 */
+    display: none; /* Initially hide the element */
     transition: opacity 0.5s ease;
     font-size: 20px;
     display: flex;

@@ -6,28 +6,46 @@ document.addEventListener('DOMContentLoaded', function() {
   var dateDisplay = document.getElementById('dateDisplay');
   var selectedDatesDisplay = document.getElementById('selectedDatesDisplay');
 
+  var today = new Date(); // Get today's date
+
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: eventData,
     selectable: true,
     selectAllow: function(info) {
-      // Only allow the selection if there are less than 2 selections
-      return selectedEndDates.length < 2;
+      // Disable the selection if it's a day before or including today
+      var selectedDate = info.start;
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth();
+      var todayDay = today.getDate();
+
+      var selectedYear = selectedDate.getFullYear();
+      var selectedMonth = selectedDate.getMonth();
+      var selectedDay = selectedDate.getDate();
+
+      if (selectedYear < todayYear ||
+        (selectedYear === todayYear && selectedMonth < todayMonth) ||
+        (selectedYear === todayYear && selectedMonth === todayMonth && selectedDay <= todayDay)) {
+        return false;
+      }
+      return true; // Allow selection for other days
     },
     select: function(info) {
-    var today = document.querySelector('.fc-day-today');
-
-      today.addEventListener('click', function(e) {
-        e.target.classList.add('selected-date');
-      });
       var start = info.start;
       var end = info.end;
+
+
 
       var endDate = end.toISOString().split('T')[0];
       selectedEndDates.push(endDate);
 
-      if (selectedEndDates.length === 2) {
-        // Display the selected dates if exactly two dates are picked
+      if (selectedEndDates.length > 2) {
+        removeSelectedDatesHighlight(selectedEndDates);
+        selectedEndDates = [];
+        dateDisplay.style.visibility = 'hidden';
+        dateDisplay.style.opacity = 0;
+        selectedEndDates.push(endDate);
+      } else {
         dateDisplay.style.visibility = 'visible';
         dateDisplay.style.opacity = 1;
         selectedDatesDisplay.textContent = formatSelectedDates(selectedEndDates);
@@ -53,6 +71,15 @@ function highlightSelectedDates(selectedDates) {
     var dateElement = document.querySelector('.fc-day[data-date="' + date + '"]');
     if (dateElement) {
       dateElement.classList.add('selected-date');
+    }
+  });
+}
+
+function removeSelectedDatesHighlight(selectedDates) {
+  selectedDates.forEach(function(date) {
+    var dateElement = document.querySelector('.fc-day[data-date="' + date + '"]');
+    if (dateElement) {
+      dateElement.classList.remove('selected-date');
     }
   });
 }

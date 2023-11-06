@@ -40,10 +40,6 @@ def checkout(request):
         messages.error(request, 'Vyberte si minimálne 2 noci.')
         return redirect('/#reservations')
 
-    if datetime.strptime(selected_dates_by_user[0], '%Y-%m-%d').date() <= current_date.date():
-        messages.error(request, 'Dnes, ani dni predtým sa nedá spraviť rezervácia.')
-        return redirect('/#reservations')
-
     # Retrieve all reservations from the database
     reservations = Order.objects.all()
 
