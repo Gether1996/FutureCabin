@@ -34,8 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
       var start = info.start;
       var end = info.end;
 
-
-
       var endDate = end.toISOString().split('T')[0];
       selectedEndDates.push(endDate);
 

@@ -1,8 +1,29 @@
 body {
     margin: 0px;
-    margin-top: 80px;
+    margin-top: 60px;
     font-size: 20px;
     color: black;
+}
+
+.video-container {
+  width: 100%;
+  position: relative;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 50px;
+  text-align: center;
 }
 
 .page-title {
@@ -114,12 +135,11 @@ body {
 
 .message-text {
     font-size: 22px;
-    margin-left: 40px;
 }
 
 .gallery-text {
     margin-top: 80px;
-    font-size: 30px;
+    font-size: 36px;
     text-weight: bold;
 }
 
@@ -128,9 +148,8 @@ body {
     text-decoration: none;
     background-color: grey;
     color: #FFF;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 30px;
+    font-size: 22px;
+    padding: 10px 80px;
     cursor: pointer;
     transition: 0.3s;
     border: none;
@@ -215,23 +234,19 @@ hr {
 }
 
 /* Change day header and event background color */
-.fc-daygrid-event, .fc-daygrid-day {
-    background-color: white;
-    color: black; /* Change text color */
-    font-size: 20px;
-    line-height: 10px;
-}
+
 
 .fc .fc-bg-event {
-    background-color: red;
-    opacity: 0.2;
+    background-color: white;
+    opacity: 1;
     font-size: 20px;
 }
 
 .fc .fc-bg-event .fc-event-title {
-    color: white;
+    color: black;
     font-style: normal;
     margin-top: 10px;
+    text-align: center;
 }
 
 .selected-date {
@@ -252,7 +267,8 @@ hr {
   width: 25px; /* Diameter of the circle */
   height: 25px; /* Diameter of the circle */
   border-radius: 50%; /* Ensure it's a circle */
-  background-color: rgba(0, 0, 40, 0.9); /* Color of the circle */
+  background-color: rgba(150, 120, 20, 1); /* Color of the circle */
+  z-index: 9999;
 }
 
 /* Styling for form container */
@@ -340,7 +356,8 @@ input[type="submit"]:hover {
 }
 
 #dateDisplay{ /* Initially set opacity to 0 */
-    display: none; /* Initially hide the element */
+    visibility: hidden; /* Initially hide the element */
+    opacity: 0;
     transition: opacity 0.5s ease;
     font-size: 20px;
     display: flex;
@@ -501,12 +518,16 @@ input[type="submit"]:hover {
     background-color: #dc3545; /* red */
 }
 
-.fc-event-start,
-.fc-event-end {
-  position: relative;
-  background-color: red; /* Change the color as needed */
-  width: 80%; /* Set to cover 70% of the width of the event */
-  margin-left: 10%; /* Trim 15% from the left side */
-  margin-right: 10%; /* Trim 15% from the right side */
-  border-radius: 0 80% 0 80%;
+.fc-event.finishing-day {
+  background-color: transparent; /* Set the background color to transparent */
+  background-image: linear-gradient(150deg, #2c3e50 50%, transparent 50%); /* Apply a 45-degree linear gradient background with a 50% fill */
+}
+
+.fc-event.starting-day {
+  background-color: transparent; /* Set the background color to transparent */
+  background-image: linear-gradient(150deg, transparent 50%, #2c3e50 50%); /* Apply a 135-degree linear gradient background with a 50% fill */
+}
+
+.fc-event.in-between {
+  background-color: #2c3e50;
 }

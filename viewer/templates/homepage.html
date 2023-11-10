@@ -12,10 +12,11 @@
         var eventData = [
             {% for event in event_data %}
                 {
-                    title: 'Rezervované',
+                    title: '',
                     start: '{{ event.start }}',
                     end: '{{ event.end }}',
-                    display: 'background'
+                    display: 'background',
+                    classNames: ['{{ event.classNames }}']
                 },
             {% endfor %}
         ];
@@ -24,6 +25,17 @@
 
 {% block content %}
 
+    <div class="video-container">
+      <video autoplay muted loop>
+        <source src="static/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="text-overlay">
+        Vitajte na XXXXXXX
+      </div>
+    </div>
+
+
     <div class="slider">
         {% for photo in photos %}
             <div><img src="{{ photo.photo.url }}" alt="Slide"></div>
@@ -31,6 +43,9 @@
     </div>
 
     <section id="reservations">
+        <div class="centered-container">
+            <h2 class="gallery-text">Rezervácia</h2>
+        </div>
 
         <div class="calendar-container">
             <div id="calendar"></div>
@@ -43,22 +58,19 @@
                     <li>dlfjasdôlfajdf</li>
                     <li>Cena 99€ za noc</li>
                 </ul>
+                <div id="dateDisplay">
+                    <p>Termín: </p>
+                    <p id="selectedDatesDisplay"></p>
+                </div>
+                <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message-text"><i class="fa-solid fa-message-exclamation"></i> {{ message }}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
-        <div class="centered-container">
-            <div id="dateDisplay">
-                <p>Termín: </p>
-                <p id="selectedDatesDisplay"></p>
-            </div>
-            <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
-        </div>
-        <div class="centered-container">
-            {% if messages %}
-                {% for message in messages %}
-                    <p class="message-text">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
+
     </section>
 
     <section id="gallery">

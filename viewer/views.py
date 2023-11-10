@@ -8,15 +8,36 @@ def homepage(request):
     photos = Photo.objects.all()
     event_data = []
     all_reservations = Order.objects.all()
+
     for reservation in all_reservations:
-        event = {
-            'start': reservation.date_from.strftime('%Y-%m-%d'),
-            'end': (reservation.date_to + timedelta(days=1)).strftime('%Y-%m-%d')
-        }
-        event_data.append(event)
+        current_date = reservation.date_from
+        end_date = reservation.date_to + timedelta(days=1)
+
+        while current_date < end_date:
+            event = {
+                'start': current_date.strftime('%Y-%m-%d'),
+                'end': current_date.strftime('%Y-%m-%d'),
+                'classNames': 'in-between'  # Default class for days in between
+            }
+            if current_date == reservation.date_from:
+                event['classNames'] = 'starting-day'
+            if current_date == end_date - timedelta(days=1):
+                event['classNames'] = 'finishing-day'
+
+            event_data.append(event)
+            current_date += timedelta(days=1)
+
+    # Combine events for the same day
+    combined_event_data = {}
+    for event in event_data:
+        date = event['start']
+        if date in combined_event_data:
+            combined_event_data[date]['classNames'] = 'in-between'
+        else:
+            combined_event_data[date] = event
 
     context = {
-        'event_data': event_data,
+        'event_data': list(combined_event_data.values()),
         'photos': photos
     }
 
