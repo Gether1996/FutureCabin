@@ -22,12 +22,14 @@ def checkout(request):
     selected_dates_by_user = []
     reserved_dates = []
 
+    print(dates)
+
     if len(dates) == 1:
         start_date = datetime.strptime(dates[0], '%Y-%m-%d')
         end_date = datetime.strptime(dates[0], '%Y-%m-%d')
     else:
         start_date = datetime.strptime(dates[0], '%Y-%m-%d')
-        end_date = datetime.strptime(dates[1], '%Y-%m-%d')
+        end_date = datetime.strptime(dates[-1], '%Y-%m-%d')
         if end_date < start_date:
             start_date = datetime.strptime(dates[1], '%Y-%m-%d')
             end_date = datetime.strptime(dates[0], '%Y-%m-%d')
@@ -35,6 +37,8 @@ def checkout(request):
     while start_date <= end_date:
         selected_dates_by_user.append(start_date.strftime('%Y-%m-%d'))
         start_date += timedelta(days=1)
+
+    print(selected_dates_by_user)
 
     if len(selected_dates_by_user) <3:
         messages.error(request, 'Vyberte si minimálne 2 noci.')

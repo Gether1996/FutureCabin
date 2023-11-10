@@ -30,29 +30,48 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       return true; // Allow selection for other days
     },
-    select: function(info) {
-      var start = info.start;
-      var end = info.end;
+select: function(info) {
+  var start = info.start;
+  var end = info.end;
+  var endDate = end.toISOString().split('T')[0];
 
-      var endDate = end.toISOString().split('T')[0];
-      selectedEndDates.push(endDate);
+  if (selectedEndDates.length > 0) {
+    // Calculate the range of dates between the first and second selection
+    var startDate = new Date(selectedEndDates[0]);
+    var selectedEndDate = new Date(endDate);
+    var currentDate = new Date(Math.min(startDate, selectedEndDate)); // Ensure chronological order
+    var endDate = new Date(Math.max(startDate, selectedEndDate)); // Ensure chronological order
 
-      if (selectedEndDates.length > 2) {
-        removeSelectedDatesHighlight(selectedEndDates);
-        selectedEndDates = [];
-        dateDisplay.style.visibility = 'hidden';
-        dateDisplay.style.opacity = 0;
-        selectedEndDates.push(endDate);
-      } else {
-        dateDisplay.style.visibility = 'visible';
-        dateDisplay.style.opacity = 1;
-        selectedDatesDisplay.textContent = formatSelectedDates(selectedEndDates);
+    var dateRange = [];
+    while (currentDate <= endDate) {
+      var dateStr = currentDate.toISOString().split('T')[0];
+      if (!selectedEndDates.includes(dateStr)) { // Check if the date is already in the array
+        dateRange.push(dateStr);
       }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
 
-      highlightSelectedDates(selectedEndDates);
+    // Push all unique dates in the range into selectedEndDates
+    selectedEndDates = selectedEndDates.concat(dateRange);
+  } else {
+    selectedEndDates.push(endDate);
+  }
 
-      checkoutLink.href = '/checkout/' + '?dates=' + selectedEndDates.join(',');
-    },
+  if (selectedEndDates.length > 50) {
+    removeSelectedDatesHighlight(selectedEndDates);
+    selectedEndDates = [];
+    dateDisplay.style.visibility = 'hidden';
+    dateDisplay.style.opacity = 0;
+  } else {
+    dateDisplay.style.visibility = 'visible';
+    dateDisplay.style.opacity = 1;
+    selectedDatesDisplay.textContent = formatSelectedDates(selectedEndDates);
+  }
+
+  highlightSelectedDates(selectedEndDates);
+
+  checkoutLink.href = '/checkout/' + '?dates=' + selectedEndDates.join(',');
+},
     firstDay: 1,
     locale: 'sk', // Set the locale to Slovak
     buttonText: {
@@ -83,6 +102,10 @@ function removeSelectedDatesHighlight(selectedDates) {
 }
 
 function formatSelectedDates(dates) {
+  if (dates.length === 0) {
+    return '';
+  }
+
   // Function to format dates as DD.MM.YYYY
   var sortedDates = dates.map(function (dateString) {
     return new Date(dateString);
@@ -90,12 +113,18 @@ function formatSelectedDates(dates) {
     return a - b;
   });
 
-  var formattedDates = sortedDates.map(function (date) {
-    var day = date.getDate().toString().padStart(2, '0');
-    var month = (date.getMonth() + 1).toString().padStart(2, '0');
-    var year = date.getFullYear();
-    return day + '.' + month + '.' + year;
-  });
+  var firstDate = sortedDates[0];
+  var lastDate = sortedDates[sortedDates.length - 1];
 
-  return formattedDates.join(' - ');
+  var firstDateFormatted = formatDate(firstDate);
+  var lastDateFormatted = formatDate(lastDate);
+
+  return firstDateFormatted + ' - ' + lastDateFormatted;
+}
+
+function formatDate(date) {
+  var day = date.getDate().toString().padStart(2, '0');
+  var month = (date.getMonth() + 1).toString().padStart(2, '0');
+  var year = date.getFullYear();
+  return day + '.' + month + '.' + year;
 }
