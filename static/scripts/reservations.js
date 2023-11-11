@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var selectedDatesDisplay = document.getElementById('selectedDatesDisplay');
 
   var today = new Date(); // Get today's date
+  var clicksCount = 0;
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
@@ -30,48 +31,52 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       return true; // Allow selection for other days
     },
-select: function(info) {
-  var start = info.start;
-  var end = info.end;
-  var endDate = end.toISOString().split('T')[0];
+    select: function(info) {
+      var start = info.start;
+      var end = info.end;
+      var endDate = end.toISOString().split('T')[0];
+      clicksCount += 1;
 
-  if (selectedEndDates.length > 0) {
-    // Calculate the range of dates between the first and second selection
-    var startDate = new Date(selectedEndDates[0]);
-    var selectedEndDate = new Date(endDate);
-    var currentDate = new Date(Math.min(startDate, selectedEndDate)); // Ensure chronological order
-    var endDate = new Date(Math.max(startDate, selectedEndDate)); // Ensure chronological order
+      if (selectedEndDates.length > 0) {
+        // Calculate the range of dates between the first and second selection
+        var startDate = new Date(selectedEndDates[0]);
+        var selectedEndDate = new Date(endDate);
+        var currentDate = new Date(Math.min(startDate, selectedEndDate)); // Ensure chronological order
+        var endDate = new Date(Math.max(startDate, selectedEndDate)); // Ensure chronological order
 
-    var dateRange = [];
-    while (currentDate <= endDate) {
-      var dateStr = currentDate.toISOString().split('T')[0];
-      if (!selectedEndDates.includes(dateStr)) { // Check if the date is already in the array
-        dateRange.push(dateStr);
+        var dateRange = [];
+        while (currentDate <= endDate) {
+          var dateStr = currentDate.toISOString().split('T')[0];
+          if (!selectedEndDates.includes(dateStr)) { // Check if the date is already in the array
+            dateRange.push(dateStr);
+          }
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        // Push all unique dates in the range into selectedEndDates
+        selectedEndDates = selectedEndDates.concat(dateRange);
+      } else {
+        selectedEndDates.push(endDate);
       }
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
 
-    // Push all unique dates in the range into selectedEndDates
-    selectedEndDates = selectedEndDates.concat(dateRange);
-  } else {
-    selectedEndDates.push(endDate);
-  }
+      if (clicksCount > 2) {
+        clicksCount = 1;
+        removeSelectedDatesHighlight(selectedEndDates);
+        selectedEndDates = [];
+        var endDate = end.toISOString().split('T')[0];
+        selectedEndDates.push(endDate);
+        dateDisplay.style.visibility = 'hidden';
+        dateDisplay.style.opacity = 0;
+      } else {
+        dateDisplay.style.visibility = 'visible';
+        dateDisplay.style.opacity = 1;
+        selectedDatesDisplay.textContent = formatSelectedDates(selectedEndDates);
+      }
 
-  if (selectedEndDates.length > 50) {
-    removeSelectedDatesHighlight(selectedEndDates);
-    selectedEndDates = [];
-    dateDisplay.style.visibility = 'hidden';
-    dateDisplay.style.opacity = 0;
-  } else {
-    dateDisplay.style.visibility = 'visible';
-    dateDisplay.style.opacity = 1;
-    selectedDatesDisplay.textContent = formatSelectedDates(selectedEndDates);
-  }
+      highlightSelectedDates(selectedEndDates);
 
-  highlightSelectedDates(selectedEndDates);
-
-  checkoutLink.href = '/checkout/' + '?dates=' + selectedEndDates.join(',');
-},
+      checkoutLink.href = '/checkout/' + '?dates=' + selectedEndDates.join(',');
+    },
     firstDay: 1,
     locale: 'sk', // Set the locale to Slovak
     buttonText: {
