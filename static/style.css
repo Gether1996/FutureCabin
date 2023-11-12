@@ -251,24 +251,10 @@ hr {
 
 .selected-date {
   position: relative;
+  background-color: #2670b9;
   width: 140px; /* Adjust according to your design */
   height: 30px; /* Adjust according to your design */
   line-height: 31px; /* Center the text vertically */
-  text-align: center;
-  border-radius: 50%; /* Ensure it's a circle */
-}
-
-.selected-date::before {
-  content: '';
-  position: absolute;
-  top: 50%; /* Position it in the middle */
-  left: 50%; /* Position it in the middle */
-  transform: translate(-50%, -50%); /* Adjust the position */
-  width: 25px; /* Diameter of the circle */
-  height: 25px; /* Diameter of the circle */
-  border-radius: 50%; /* Ensure it's a circle */
-  background-color: rgba(150, 120, 20, 1); /* Color of the circle */
-  z-index: 9999;
 }
 
 /* Styling for form container */
@@ -532,4 +518,16 @@ input[type="submit"]:hover {
 
 .fc-event.in-between {
   background-color: #2c3e50;
+}
+
+.fc-day {
+    cursor: pointer;
+}
+
+.fc-day.fc-day-past {
+    cursor: not-allowed;
+}
+
+.fc-day.fc-day-today {
+    cursor: not-allowed;
 }
