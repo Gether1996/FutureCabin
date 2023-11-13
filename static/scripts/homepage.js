@@ -13,12 +13,12 @@ $('.slider').slick({
 });
 
 function smoothScroll(targetId) {
-    const target = document.getElementById(targetId);
+    var target = document.getElementById(targetId);
     if (target) {
-      const targetPosition = target.offsetTop; // Get the target element's position
-      const startPosition = window.pageYOffset; // Get current position
-      const distance = targetPosition - startPosition;
-      const duration = 1000; // Set the duration of the scroll in milliseconds
+      var targetPosition = target.offsetTop; // Get the target element's position
+      var startPosition = window.pageYOffset; // Get current position
+      var distance = targetPosition - startPosition;
+      var duration = 1000; // Set the duration of the scroll in milliseconds
       let start = null;
 
       // Function to perform the scrolling animation
@@ -26,8 +26,8 @@ function smoothScroll(targetId) {
         if (start === null) {
           start = currentTime;
         }
-        const timeElapsed = currentTime - start;
-        const run = ease(timeElapsed, startPosition, distance, duration);
+        var timeElapsed = currentTime - start;
+        var run = ease(timeElapsed, startPosition, distance, duration);
         window.scrollTo(0, run);
         if (timeElapsed < duration) {
           requestAnimationFrame(animation);
