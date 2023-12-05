@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block extra_head %}
     <title>Domov</title>
@@ -28,10 +29,9 @@
     <div class="video-container">
       <video autoplay muted loop>
         <source src="static/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
       </video>
       <div class="text-overlay">
-        Vitajte na XXXXXXX
+          {% trans 'Vitajte na XXXXXX' %}
       </div>
     </div>
 
@@ -44,25 +44,22 @@
 
     <section id="reservations">
         <div class="centered-container">
-            <h2 class="gallery-text">Rezervácia</h2>
+            <h2 class="gallery-text">{% trans 'Rezervácia' %}</h2>
         </div>
 
         <div class="calendar-container">
             <div id="calendar"></div>
             <div class="calendar-text">
                 <ul>
-                    <li>Minimálne 2 noci</li>
-                    <li>Aktuálny deň a dni pred sa nedajú rezervovať</li>
-                    <li>dlfjasdôlfajdf</li>
-                    <li>dlfjasdôlfajdf</li>
-                    <li>dlfjasdôlfajdf</li>
-                    <li>Cena 99€ za noc</li>
+                    <li>{% trans 'Minimálne na 2 noci' %}</li>
+                    <li>{% trans 'Dnes a dni pred sa nedajú rezervovať' %}</li>
+                    <li>{% trans 'Cena 99€/noc' %}</li>
                 </ul>
                 <div id="dateDisplay">
-                    <p>Termín: </p>
+                    <p>{% trans 'Termín' %}: </p>
                     <p id="selectedDatesDisplay"></p>
                 </div>
-                <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">Rezervovať</a>
+                <a class="reservation-button" id="checkout-link" href="{% url 'checkout' %}">{% trans 'Rezervovať' %}</a>
                 {% if messages %}
                     {% for message in messages %}
                         <p class="message-text"><i class="fa-solid fa-message-exclamation"></i> {{ message }}</p>
@@ -75,7 +72,7 @@
 
     <section id="gallery">
         <div class="centered-container">
-            <h2 class="gallery-text">Galéria</h2>
+            <h2 class="gallery-text">{% trans 'Galéria' %}</h2>
         </div>
 
         <div class="photo-grid">

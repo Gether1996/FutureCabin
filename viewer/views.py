@@ -1,10 +1,13 @@
 from datetime import timedelta
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Photo
 from reservation.models import Order
+from django.utils.translation import activate
 
 
 def homepage(request):
+    language_code = request.session['django_language']
+    activate(language_code)
     photos = Photo.objects.all()
     event_data = []
     all_reservations = Order.objects.all()
@@ -42,3 +45,10 @@ def homepage(request):
     }
 
     return render(request, 'homepage.html', context)
+
+
+def switch_language(request, language_code):
+    next_url = request.META.get('HTTP_REFERER', '/')
+    activate(language_code)
+    request.session['django_language'] = language_code
+    return redirect(next_url)

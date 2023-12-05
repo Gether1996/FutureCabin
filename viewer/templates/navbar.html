@@ -1,9 +1,17 @@
+{% load i18n %}
+{% load static %}
+{% load language_switch %}
+
 <nav class="navbar">
   <div class="navbar-container">
     <a href="{% url 'homepage' %}" class="navbar-button" title="Domov"><i class="fa-light fa-cabin"></i></a>
-    <a href="#" class="navbar-button" onclick="smoothScroll('reservations')">Rezervácia</a>
-    <a href="#" class="navbar-button" onclick="smoothScroll('gallery')">Galéria</a>
-    <a href="#" class="navbar-button" onclick="smoothScroll('footer')">Kontakt</a>
+    <a href="#" class="navbar-button" onclick="smoothScroll('reservations')">{% trans 'Rezervácia' %}</a>
+    <a href="#" class="navbar-button" onclick="smoothScroll('gallery')">{% trans 'Galéria' %}</a>
+    <a href="#" class="navbar-button" onclick="smoothScroll('footer')">{% trans 'Kontakt' %}</a>
     <a href="#" class="navbar-button" onclick="scrollToTop()" title="Späť na začiatok"><i class="fa-solid fa-arrow-up-to-line"></i></a>
+  </div>
+  <div class="navbar-languages">
+      <a href="{% switch_language_url 'sk' %}"><img src="{% static 'images/slovakia.png' %}" alt=""></a>
+      <a href="{% switch_language_url 'en' %}"><img src="{% static 'images/united-kingdom.png' %}" alt=""></a>
   </div>
 </nav>

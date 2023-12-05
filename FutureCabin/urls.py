@@ -17,23 +17,21 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
-from viewer.views import homepage
-from accounts.views import logout_view, registration, account
+from django.urls import path, include, re_path
+from viewer.views import homepage, switch_language
+# from accounts.views import logout_view, registration, account
 from reservation.views import checkout, order, success, fail
+from django.views.i18n import set_language
 
 urlpatterns = [
     path('', homepage, name='homepage'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('registration/', registration, name='registration'),
-    path('accounts/profile/', account, name='account_after_login'),
-    path('account/', account, name='account'),
-    path('logout/', logout_view, name='logout'),
     path('paypal/ipn/', homepage, name='paypal_ipn'),
     path('', include('paypal.standard.ipn.urls')),
     path('checkout/', checkout, name='checkout'),
     path('order/<int:order_id>/', order, name='order'),
     path('success/', success, name='success'),
     path('fail/', fail, name='fail'),
+    path('switch_language/<str:language_code>/', switch_language, name='switch_language'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

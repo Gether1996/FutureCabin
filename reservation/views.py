@@ -7,9 +7,12 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.urls import reverse
 import uuid
+from django.utils.translation import activate
 
 
 def checkout(request):
+    language_code = request.session['django_language']
+    activate(language_code)
     current_date = datetime.now()
     dates = request.GET.get('dates')
     print(dates)
@@ -97,6 +100,8 @@ def checkout(request):
 
 
 def order(request, order_id):
+    language_code = request.session['django_language']
+    activate(language_code)
     order_details = Order.objects.get(id=order_id)
 
     request.session['order_id'] = order_details.id
@@ -125,6 +130,8 @@ def order(request, order_id):
 
 
 def success(request):
+    language_code = request.session['django_language']
+    activate(language_code)
     order_id = request.session['order_id']
     print(order_id)
     order_to_pay = Order.objects.get(id=order_id)
@@ -135,5 +142,7 @@ def success(request):
 
 
 def fail(request):
+    language_code = request.session['django_language']
+    activate(language_code)
     del request.session['coins']
     return render(request, 'payment_fail.html')

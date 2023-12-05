@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 ROOT_URLCONF = 'FutureCabin.urls'
 
 TEMPLATES = [
@@ -107,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'sk'
 
 TIME_ZONE = 'Europe/Bratislava'
 
@@ -129,3 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PAYPAL_RECEIVER_EMAIL = "pat.kredatus@gmail.com"
 PAYPAL_TEST = True  # Set this to False when you're ready to go live
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
