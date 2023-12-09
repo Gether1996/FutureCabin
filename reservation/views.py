@@ -70,7 +70,10 @@ def checkout(request):
             return redirect('/#reservations')
 
     nights_count = len(selected_dates_by_user) - 1
-    night_text = 'noci' if nights_count < 5 else 'nocí'
+    if language_code == 'sk':
+        night_text = 'noci' if nights_count < 5 else 'nocí'
+    else:
+        night_text = 'nights'
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -141,10 +144,11 @@ def success(request):
     order_to_pay.paid = True
     order_to_pay.save()
 
-    subject = f'Objednávka chaty č. {order_to_pay.id}'
     if language_code == 'sk':
+        subject = f'Objednávka chaty č. {order_to_pay.id}'
         message = render_to_string('email_template.html', {'order': order_to_pay})
     else:
+        subject = f'Order of cottage number {order_to_pay.id}'
         message = render_to_string('email_template_en.html', {'order': order_to_pay})
     plain_message = strip_tags(message)
     from_email = 'gether1996@gmail.com'

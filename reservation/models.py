@@ -9,6 +9,6 @@ class Order(Model):
     date_to = DateField()
     address = CharField(max_length=100)
     city = CharField(max_length=100)
-    postal = BigIntegerField()
+    postal = CharField(max_length=5)
     price = IntegerField(null=True, blank=True)
     paid = BooleanField(default=False)
