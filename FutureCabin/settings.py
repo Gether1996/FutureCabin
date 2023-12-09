@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'viewer.context_processors.language_code',
             ],
         },
     },
@@ -134,3 +135,10 @@ PAYPAL_TEST = True  # Set this to False when you're ready to go live
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gether1996@gmail.com'  # Your Gmail address
+EMAIL_HOST_PASSWORD = 'dkko unek tkri esux'  # Use the app password you generated

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-05 10:47+0100\n"
+"POT-Creation-Date: 2023-12-09 20:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2226,11 +2226,47 @@ msgstr ""
 msgid "Invalid date format %(value)s: %(e)s"
 msgstr ""
 
+#: .\viewer\templates\checkout.html:4 .\viewer\templates\checkout.html:9
+msgid "Objednávka"
+msgstr "Order"
+
+#: .\viewer\templates\checkout.html:11 .\viewer\templates\homepage.html:59
+msgid "Termín"
+msgstr "Term"
+
+#: .\viewer\templates\checkout.html:15
+msgid "Meno a priezvisko"
+msgstr "Name and Surname"
+
+#: .\viewer\templates\checkout.html:23 .\viewer\templates\order.html:29
+msgid "Telefón"
+msgstr "Phone"
+
+#: .\viewer\templates\checkout.html:27 .\viewer\templates\order.html:33
+msgid "Ulica"
+msgstr "Street"
+
+#: .\viewer\templates\checkout.html:31 .\viewer\templates\order.html:37
+msgid "Mesto"
+msgstr "City"
+
+#: .\viewer\templates\checkout.html:35 .\viewer\templates\order.html:41
+msgid "PSČ"
+msgstr "Postal code"
+
+#: .\viewer\templates\checkout.html:39
+msgid "Prejsť na platbu"
+msgstr "Go to payment"
+
+#: .\viewer\templates\homepage.html:6 .\viewer\templates\navbar.html:7
+msgid "Domov"
+msgstr "Home"
+
 #: .\viewer\templates\homepage.html:34
 msgid "Vitajte na XXXXXX"
 msgstr "Welcome to XXXXXX"
 
-#: .\viewer\templates\homepage.html:47 .\viewer\templates\navbar.html:5
+#: .\viewer\templates\homepage.html:47 .\viewer\templates\navbar.html:8
 msgid "Rezervácia"
 msgstr "Reservation"
 
@@ -2246,18 +2282,66 @@ msgstr "Can not reserve today nor days before"
 msgid "Cena 99€/noc"
 msgstr "Price 99€/night"
 
-#: .\viewer\templates\homepage.html:59
-msgid "Termín"
-msgstr "Term"
-
 #: .\viewer\templates\homepage.html:62
 msgid "Rezervovať"
 msgstr "Reserve"
 
-#: .\viewer\templates\homepage.html:75 .\viewer\templates\navbar.html:6
+#: .\viewer\templates\homepage.html:75 .\viewer\templates\navbar.html:9
 msgid "Galéria"
 msgstr "Gallery"
 
-#: .\viewer\templates\navbar.html:7
+#: .\viewer\templates\navbar.html:10
 msgid "Kontakt"
 msgstr "Contact"
+
+#: .\viewer\templates\navbar.html:11
+msgid "Späť na začiatok"
+msgstr "Scroll to top"
+
+#: .\viewer\templates\navbar.html:15
+msgid "Slovenčina"
+msgstr "Slovak"
+
+#: .\viewer\templates\navbar.html:17
+msgid "Angličtina"
+msgstr "English"
+
+#: .\viewer\templates\order.html:4
+msgid "Zhrnutie"
+msgstr "Summary"
+
+#: .\viewer\templates\order.html:9
+msgid "Zhrnutie a platba"
+msgstr "Summary and payment"
+
+#: .\viewer\templates\order.html:13
+msgid "Meno a Priezviko"
+msgstr "Name and Surname"
+
+#: .\viewer\templates\order.html:17
+msgid "Od"
+msgstr "From"
+
+#: .\viewer\templates\order.html:21
+msgid "Do"
+msgstr "To"
+
+#: .\viewer\templates\order.html:45
+msgid "Cena"
+msgstr "Price"
+
+#: .\viewer\templates\payment_fail.html:4
+msgid "Platba neprešla"
+msgstr "Payment failed"
+
+#: .\viewer\templates\payment_fail.html:8
+msgid "Platba neprešla, skúste spraviť novú objednávku."
+msgstr "Payment failed, try again please."
+
+#: .\viewer\templates\payment_ok.html:4
+msgid "Zaplatené"
+msgstr "Paid successfully"
+
+#: .\viewer\templates\payment_ok.html:8
+msgid "Vďaka za platbu, objednávka Vám príde na email."
+msgstr "Thank you for payment, order sent to your email."

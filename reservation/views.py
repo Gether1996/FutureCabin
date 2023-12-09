@@ -8,10 +8,13 @@ from django.conf import settings
 from django.urls import reverse
 import uuid
 from django.utils.translation import activate
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 def checkout(request):
-    language_code = request.session['django_language']
+    language_code = request.session.get('django_language', 'sk')
     activate(language_code)
     current_date = datetime.now()
     dates = request.GET.get('dates')
@@ -100,7 +103,7 @@ def checkout(request):
 
 
 def order(request, order_id):
-    language_code = request.session['django_language']
+    language_code = request.session.get('django_language', 'sk')
     activate(language_code)
     order_details = Order.objects.get(id=order_id)
 
@@ -130,19 +133,29 @@ def order(request, order_id):
 
 
 def success(request):
-    language_code = request.session['django_language']
+    language_code = request.session.get('django_language', 'sk')
     activate(language_code)
     order_id = request.session['order_id']
     print(order_id)
     order_to_pay = Order.objects.get(id=order_id)
     order_to_pay.paid = True
     order_to_pay.save()
+
+    subject = f'Objednávka chaty č. {order_to_pay.id}'
+    if language_code == 'sk':
+        message = render_to_string('email_template.html', {'order': order_to_pay})
+    else:
+        message = render_to_string('email_template_en.html', {'order': order_to_pay})
+    plain_message = strip_tags(message)
+    from_email = 'gether1996@gmail.com'
+    send_mail(subject, plain_message, from_email, [order_to_pay.email, 'gether1996@gmail.com'], html_message=message)
+
     del request.session['order_id']
     return render(request, 'payment_ok.html')
 
 
 def fail(request):
-    language_code = request.session['django_language']
+    language_code = request.session.get('django_language', 'sk')
     activate(language_code)
     del request.session['coins']
     return render(request, 'payment_fail.html')

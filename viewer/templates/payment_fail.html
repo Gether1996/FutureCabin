@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block extra_head %}
-    <title>Payment successful</title>
+    <title>{% trans 'Platba neprešla' %}</title>
 {% endblock %}
 
 {% block content %}
-    <h1 class="page-title">Platba neprešla, skúste spraviť novú objednávku.</h1>
+    <h1 class="page-title">{% trans 'Platba neprešla, skúste spraviť novú objednávku.' %}</h1>
 {% endblock %}
 
 {% block extra_scripts %}

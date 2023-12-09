@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
       checkoutLink.href = '/checkout/' + '?dates=' + selectedEndDates.join(',');
     },
     firstDay: 1,
-    locale: 'sk', // Set the locale to Slovak
+    locale: (language_code === 'sk') ? 'sk' : 'en',
     buttonText: {
-      today: 'Aktuálny Mesiac' // Customize the "today" button text to Slovak
+      today: (language_code === 'sk') ? 'Aktuálny mesiac' : 'This month'
     }
   });
 

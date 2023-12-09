@@ -17,11 +17,9 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from viewer.views import homepage, switch_language
-# from accounts.views import logout_view, registration, account
 from reservation.views import checkout, order, success, fail
-from django.views.i18n import set_language
 
 urlpatterns = [
     path('', homepage, name='homepage'),

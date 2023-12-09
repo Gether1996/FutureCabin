@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <table class="order-table">
+        <tr>
+            <td><strong>Name and Surname:</strong></td>
+            <td>{{ order.name_surname }}</td>
+        </tr>
+        <tr>
+            <td><strong>From:</strong></td>
+            <td>{{ order.date_from|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <td><strong>To:</strong></td>
+            <td>{{ order.date_to|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ order.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Phone:</strong></td>
+            <td>{{ order.phone }}</td>
+        </tr>
+        <tr>
+            <td><strong>Street:</strong></td>
+            <td>{{ order.address }}</td>
+        </tr>
+        <tr>
+            <td><strong>City:</strong></td>
+            <td>{{ order.city }}</td>
+        </tr>
+        <tr>
+            <td><strong>Postal code:</strong></td>
+            <td>{{ order.postal }}</td>
+        </tr>
+        <tr>
+            <td><strong>Price:</strong></td>
+            <td>{{ order.price }} €</td>
+        </tr>
+    </table>
+
+</body>
+</html>

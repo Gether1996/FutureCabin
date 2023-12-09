@@ -60,6 +60,18 @@ body {
   transition: transform 0.2s; /* Add a smooth transition effect */
 }
 
+.switch-language-button {
+  color: black;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.switch-language-button:hover{
+  scale: 1.3;
+}
+
 .login-register-container {
   width: 300px;
   text-align: center;

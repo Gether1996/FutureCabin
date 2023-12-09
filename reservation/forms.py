@@ -2,6 +2,7 @@ from django import forms
 from .models import Order
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
+
 class OrderForm(forms.ModelForm):
 
     postal = forms.CharField(
